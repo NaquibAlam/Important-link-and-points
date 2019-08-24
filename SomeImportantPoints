@@ -1,0 +1,109 @@
+1. Importance is calculated for a single decision tree by the amount that each attribute split point improves the performance measure, weighted by the number of observations the node is responsible for. The performance measure may be the purity (Gini index) used to select the split points or another more specific error function. The feature importances are then averaged across all of the the decision trees within the model.
+
+2. The square root of the variance inflation factor indicates how much larger the standard error is, compared with what it would be if that variable were uncorrelated with the other predictor variables in the model. 
+If the variance inflation factor of a predictor variable were 5.27 (√5.27 = 2.3), this means that the standard error for the coefficient of that predictor variable is 2.3 times as large as it would be if that predictor variable were uncorrelated with the other predictor variables.
+
+3. Looking at correlations only among pairs of predictors, however, is limiting. It is possible that the pairwise correlations are small, and yet a linear dependence exists among three or even more variables, for example, if X3 = 2X1 + 5X2 + error, say. That's why many regression analysts often rely on what are called variance inflation factors (VIF) to help detect multicollinearity.
+
+4. if we want to input variable size images to a CNN then we should use Globalmaxpooling/Globalaveragepooling just before the first FC layer to convert variable size output from last conv layer to fixed size input to FC layer.
+
+5. use plot_model() to plot the model graph in keras.
+
+6. Suppose you've a csv (or any) format file generated after running kernel, just add below HTML code in markdown cell of your ipynb file.
+		<a href="Your file path"> Download File </a>
+
+7. model.eval() will notify all your layers that you are in eval mode, that way, batchnorm or dropout layers will work in 	eval mode instead of training mode.
+ 	torch.no_grad() impacts the autograd engine and deactivate it. It will reduce memory usage and speed up computations 
+but you won’t be able to backprop (which you don’t want in an eval mode anyway).
+
+8. If there’s a single input to an operation that requires gradient, its output will also require gradient. Conversely, only if all inputs don’t require gradient, the output also won’t require it. Backward computation is never performed in the subgraphs, where all Tensors didn’t require gradients.
+
+9. You should pass logits to nn.BCEwithLogitsLoss and probabilities (using sigmoid) to nn.BCELoss.
+
+10. The Hessian is a Matrix of Second Order Partial Derivatives. Since the second derivative is costly to compute, the second order is not used much .The second order derivative tells us whether the first derivative is increasing or decreasing which hints at the function’s curvature.Second Order Derivative provide us with a quadratic surface which touches the curvature of the Error Surface.
+
+11. The Median and IQR is preferred over mean and standard deviation when the distribution is very highly skewed or there are severe outliers, because the Median and IQR is less sensitive to these features than mean and std dev is.
+
+12. Although a boxplot can tell you whether a data set is symmetric (when the median is in the center of the box), it can’t tell you the shape of the symmetry the way a histogram can. Despite its weakness in detecting the type of symmetry (you can add in a histogram to your analyses to help fill in that gap), a boxplot has a great upside in that you can identify actual measures of spread and center directly from the boxplot, where on a histogram you can’t. A boxplot is also good for comparing data sets by showing them on the same graph, side by side.
+
+13. Degree of Freedom are the number of observations in a sample that are free to vary while estimating statistical parameters. 
+
+14. The p-values is the likelihood of observing that particuluar sample value if the null hypothesis were true.Therefore, if the p-value is smaller than your significance level, you can reject the null hypothesis.
+
+15. The Student’s t-distributions similar to the normal distribution, except it is more spread out and wider in appear-ance, and has thicker tails.  As the number of observations gets larger, the t-distribution shape becomes more andmore like the shape of the normal distribution. In fact, if we had an infinite number of observations, the t distributionwould perfectly match the normal distribution. It is the t-distribution that allows us to test hypotheses when we don’tknow the true population standard deviation.
+
+16. Try transforming the variables using transformations like BoxCox or YeoJohnson to make the features near Normal.
+
+17. In Bayesian statistics, a maximum a posteriori probability (MAP) estimate is an estimate of an unknown quantity, that equals the mode of the posterior distribution. The MAP can be used to obtain a point estimate of an unobserved quantity on the basis of empirical data. It is closely related to the method of maximum likelihood (ML) estimation,.
+
+18. The original paper says they do it before the non-linearity for theoretical motivations, but experimental evidence suggests (specifically with relus) show that more often than not it works slightly better in deep networks after the activation function, although it apparently depends on the architecture. I always thought it was about normalizing the inputs to a layer to prevent internal covariant shift, which would mean it would make more sense to do it after the previous layer's non-linearity. Also, the authors of BN performed their experiments with sigmoid activations, and I think it likely that relus could change things theoretically speaking.
+
+19. For convolutional layers, we additionally want the normalization to obey the convolutional property – so that different elements of the same feature map, at different locations, are normalized in the same way. To achieve this, we jointly  normalize  all  the  activations in a mini-batch, over all locations. In Alg. 1, we let B be the set of all values in a feature map across both the elements of a mini-batch and spatial locations – so for a mini-batch of size m and feature maps of size p×q, we use the effective mini-batch of size m'=|B|=m·p.q.  We learn a pair of parameters γ(k)and β(k)per feature map, rather than per activation.
+
+20. When training with Batch Normalization, a training example is seen in conjunction with other examples in the mini-batch,  and  the  training network no  longer producing deterministic values for a given training example.  In our experiments, we found this effect to be advantageous to the  generalization of the network.   Whereas Dropout is typically used to reduce over-fitting, in a batch-normalized network we found that it canbe either removed or reduced in strength.
+
+21. The recursive binary splitting procedure described above needs to know when to stop splitting as it works its way down the tree with the training data. The most common stopping procedure is to use a minimum count on the number of training instances assigned to each leaf node. If the count is less than some minimum then the split is not accepted and the node is taken as a final leaf node. The count of training members is tuned to the dataset, e.g. 5 or 10. It defines how specific to the training data the tree will be. Too specific (e.g. a count of 1) and the tree will overfit the training data and likely have poor performance on the test set.
+
+22. The fastest and simplest pruning method is to work through each leaf node in the tree and evaluate the effect of removing it using a hold-out test set. Leaf nodes are removed only if it results in a drop in the overall cost function on the entire test set. You stop removing nodes when no further improvements can be made.
+
+23. For classification the Gini index function is used which provides an indication of how “pure” the leaf nodes are (how mixed the training data assigned to each node is).
+
+G = sum(pk * (1 – pk))= 1- sum(pk^2)
+
+Where G is the Gini index over all classes, pk are the proportion of training instances with class k in the rectangle of interest. A node that has all classes of the same type (perfect class purity) will have G=0, where as a G that has a 50-50 split of classes for a binary classification problem (worst purity) will have a G=0.5.
+
+24. XGBoost is not sensitive to monotonic transformations or scaling of its features for the same reason that decision trees and random forests are not: the model only needs to pick "cut points" on features to split a node. Splits are not sensitive to monotonic transformations: defining a split on one scale has a corresponding/same split on the transformed scale.
+
+25. For data including categorical variables with different number of levels, random forests are biased in favor of those attributes with more levels. Therefore, the variable importance scores from random forest are not reliable for this type of data. Methods such as partial permutations were used to solve the problem.
+
+26. Python imports work by searching the directories listed in sys.path. 
+27. Similar to existing work (Peters et al., 2017, 2018), we are not limited to fine-tuning a unidirectional language model. For all our experiments, we pretrain both a forward and a backward LM. We fine-tune a classifier for each LM independently using BPT3C and average the classifier predictions. At the cost of training a second model, ensembling the predictions of a forward and backwards LM-classifier brings a performance boost. 
+
+28. Similar to backpropagation through time for language modeling, BPTT for text classification (from pre-trained LMs) is introduced. The document is divided into fixed-length chunks. At the beginning of each chunk, the model is initialized with the final state of the previous chunk. Gradients are back propagated to the batches whose hidden state contributed to the final prediction. In practice, variable length backpropagation sequences are used.
+
+29.  For  fine-tuning,  the  BERT  model  is  first  initialized  with the pre-trained parameters, and all of the param-eters  are  fine-tuned  using  labeled  data  from  the downstream tasks. Each downstream task has sep-arate fine-tuned models, even though they are ini-tialized with the same pre-trained parameters.
+
+30. Unfortunately,standard conditional language models can only be trained left-to-right or right-to-left, since bidirec-tional conditioning would allow each word to in-directly “see itself”, and the model could trivially predict the target word in a multi-layered context. 
+
+31. In all of ourexperiments, we mask 15% of all WordPiece tokens in each sequence at random.
+32. For  applications  involving  text  pairs,  a  commonpattern is to independently encode text pairs be-fore  applying  bidirectional  cross  attention,  suchas Parikh et al. (2016); Seo et al. (2017).  BERTinstead uses the self-attention mechanism to unifythese two stages, as encoding a concatenated textpair  with  self-attention  effectively  includesbidi-rectionalcross attention between two sentences.
+
+33. Compared to standard langauge model training,the masked LM only make predictions on 15% oftokens  in  each  batch,  which  suggests  that  more pre-training steps may be required for the model to converge.  In Section C.1 we demonstrate thatMLM does converge marginally slower than a left-to-right  model  (which  predicts  every  token),  butthe  empirical  improvements  of  the  MLM  modelfar outweigh the increased training cost.
+
+34. If we look a bit more look closely at the equation for attention we can see that attention comes at a cost. We need to calculate an attention value for each combination of input and output word. If you have a 50-word input sequence and generate a 50-word output sequence that would be 2500 attention values. So it can be said that Attention takes O(n^2).
+
+35. For data including categorical variables with different number of levels, random forests are biased in favor of those attributes with more levels (cause it works on splitting on features). Therefore, the variable importance scores from random forest are not reliable for this type of data.
+
+36. For AdaBoost (only used as a classifier), it solves this equation for the exponential loss function under the constraint that ϕm(x) (estimator at mth iteration) only outputs -1 or 1. While GBM and XGBoost can be viewed as two general boosting algorithms that solve the equation approximately for any suitable (differentiable) loss function. 
+
+37.GBM divides the optimization problem into two parts by first determining the direction of the step and then optimizing the step length. For XGBoost, the weight is also known as the Newton “step”, which naturally has step length of 1 (cause of hessian in XGBoost). Thus, line search is not necessary for XGBoost. This might be the reason why XGBoost is always much faster than GBM.
+
+38. At each iteration, both GBM and XGBoost need to calculate gradient at current estimate. XGBoost also needs to calculate hessian, requiring the objective function to be twice differentiable (strictly convex). GBM only requires a differentiable loss function, thus it can be used in more applications.
+
+39. Tree based algos are invariant to scaling of inputs, so you do not need to do careful features normalization.
+
+40. Theoretically simple linear regression model doesnt require the features to be standardized but it's still recommended to stadardize for folllowing reasons or in following scenarios:
+	-- when one of the variables have a very large scale then in that case this feature might have a very small coefficient to compensate for very large scale. The coefficient of this small magnitude might cause some numerical precision issue while storing this small coefficient in the computer.
+	-- When we include higher order orinteraction terms, the model almost certainly has excessive amounts of multicollinearity. These higher-order terms multiply independent variables that are in the model. Consequently, it’s easy to see how these terms are correlated with other independent variables in the model. This problem of multicoliinearity becomes worse when features are at different scale which can be taken care by standardizing the features. Although, it’s important to note that standardization won’t work for other causes of multicollinearity.
+	-- when we are using regularization it's advisable to standardize the features otherwise regularization will penalize features at different scale in different ways which might impact the overall performance of model. 
+	You can translate features any which way you want without changing the model. With scaling you need to be a little more careful when using a regularized model – these models are not scaling invariant. If the scales of predictors vary wildly, models like the Lasso will shrink out the scaled down predictors. To put all predictors on an equal footing, you should be rescaling the columns. 
+	-- Scaling the features are important when we are using Gradient Descent to find the coefficient of the regression mdodel. When the features are at different scale then updating the weights using GD will take a lot of time to converge.So, scaling can help in the faster convergence of the algorithm in case you are using Gradient Descent.
+	It's important to note that if we are using analytical solution then scaling wont be of much use.
+
+41. A saddle point, by definition, is a critical point in which some dimensions observe a local minimum while other dimensions observe a local maximum. Because neural networks can have thousands or even millions of parameters, it's unlikely that we'll observe a true local minimum across all of these dimensions; saddle points are much more likely to occur. When I referred to "sharp minima", realistically we should picture a saddle point where the minimum dimensions are very steep while the maximum dimensions are very wide.
+
+42. by stacking smaller convolutions on top of one another, one can essentially mimic larger convolutions more effectively (less parameters, less multiplications, thus faster training and smaller footprint).
+
+43. Why regular drop is not used with conv layers ?? 
+convolutional layers usually don't have all that many parameters, so they need less regularization to begin with. Another is that, because the gradients are averaged over the spatial extent of the feature maps, dropout becomes ineffective: there end up being many correlated terms in the averaged gradient, each with different dropout patterns. So the net effect is that it only slows down training, but doesn't prevent co-adaptation. 
+dropout in a fully convolutional network is like zero’ing out random pixels in an image. Still pretty easy to tell what the image is since there’s so much correlation (neighbouring pixles are highly correlated) within the network, especially 2D and 3D FCNs. Even if you increase dropout to 50%. On the other hand, spatial dropout zero’s out entire convolutional filters/kernels, which leads to the same regularization effects that we see in fully connected / feed forward networks. This is exactly what SpatialDropout2D (keras) does in CNN: it promotes independence between feature maps.
+
+In our analysis of dropout in fully-connected networks, we showed that the dropout operation could be understood as zeroing out columns of a weight matrix in the neural network. This operation corresponded to not training, or “dropping out,” a neuron.
+
+In the above analysis, we have shown that dropout on convolutional layers does not produce the same effect. This is demonstrated by the fact that zeroing out a column of the weight matrix corresponding to the convolutional kernel still allows the weights in that column to be trained.
+
+As described in the paper, Efficient Object Localization Using Convolutional Networks, if adjacent pixels within feature maps are strongly correlated (as is normally the case in early convolution layers) then i.i.d. dropout will not regularize the activations and will otherwise just result in an effective learning rate decrease.
+
+In this case, nn.Dropout2d() (of pytorch) will help promote independence between feature maps and should be used instead.
+
+44. The YOLO training composes of 2 phases. First, we train a classifier network like VGG16. Then we replace the fully connected layers with a convolution layer and retrain it end-to-end for the object detection. YOLO trains the classifier with 224 × 224 pictures followed by 448 × 448 pictures for the object detection. YOLOv2 starts with 224 × 224 pictures for the classifier training but then retune the classifier again with 448 × 448 pictures using much fewer (10) epochs. This gives the network time to adjust its filters to work better on higher resolution input.This makes the detector training easier and moves mAP up by 4%.
